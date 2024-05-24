@@ -1,5 +1,4 @@
 name: need_check_three_operations
-
 on: push
 jobs:
   build:
@@ -7,9 +6,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+        with:
+         node-version: '21.x'
+         cache: 'npm'
       - name: run install
-        run: npm install
+        run: make install
       - name: run test
-        run: npm test
-      - name: tun lint
-        run: npx eslint .
+        run: make test
+      - name: run lint
+        run: make lint
+   
+   security:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@master
+       - name: Run Snyk to check for vulnerabilities
+         uses: snyk/actions/node@master
+         env:
+           SEC_CHECK: ${{ secrets.SEC_CHECK }}
+         with:
+           args: --severity-threshold=high
