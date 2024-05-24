@@ -25,6 +25,4 @@ jobs:
        - name: Run Snyk to check for vulnerabilities
          uses: snyk/actions/node@master
          env:
-           SEC_CHECK: ${{ secrets.SEC_CHECK }}
-         with:
-           args: --severity-threshold=high
+          SECRET_FOR_SNYK: ${{ secrets.SECRET_FOR_SNYK }}
