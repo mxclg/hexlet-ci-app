@@ -1,4 +1,4 @@
-name: check_three_operations
+name: need_check_three_operations
 
 on: push
 jobs:
